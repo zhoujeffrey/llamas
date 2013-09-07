@@ -1,6 +1,26 @@
 package com.PennApps.llamas;
 
-public class GameActivity {
+import android.app.Activity;
+import android.graphics.drawable.AnimationDrawable;
+import android.os.Bundle;
+import android.widget.ImageView;
+
+public class GameActivity extends Activity {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_game);
+		
+		ImageView img = (ImageView) findViewById(R.id.gameBg);
+		img.setBackgroundResource(R.drawable.background);
+		
+		// Get the background, which has been compiled to an AnimationDrawable object.
+		 AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
+		 
+		 frameAnimation.start();
+			
+	}
+	
 	private void calculate_collision(float llama_x, float llama_y) {
 		// Cycle through data object
 		while (true) {
