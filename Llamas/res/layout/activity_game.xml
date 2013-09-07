@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GameActivity" >
-    
+
     <ImageView
         android:id="@+id/gameBg"
         android:oneshot="false"
-		android:layout_width = "fill_parent"
-		android:layout_height= "fill_parent"
-        >
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+	>
         
     </ImageView>
 

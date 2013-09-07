@@ -11,5 +11,4 @@ public class Constants {
 	public static final int event_death_spike = 998;
 	public static final int SWIPE_MIN_DISTANCE = 120;
     public static final int SWIPE_THRESHOLD_VELOCITY = 200;
-	
 }

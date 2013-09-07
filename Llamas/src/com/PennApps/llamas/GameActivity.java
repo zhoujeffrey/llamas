@@ -4,25 +4,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
 public class GameActivity extends Activity {
+	
+	
+	/*
+	class AnotherView extends ImageView {
+
+		public AnotherView(Context context) {
+			super(context);
+			// TODO Auto-generated constructor stub
+		}
+		
+		public void onDraw(){
+			
+		}
+		
+	}
+	*/
 	
 	private List<Obstacle> obstacle_list = new ArrayList<Obstacle>();
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		
-		BackgroundThread thread = new BackgroundThread();
-		thread.execute();
-		
 		ImageView img = (ImageView) findViewById(R.id.gameBg);
 		img.setBackgroundResource(R.drawable.f01);
+		
+		
+		//BackgroundThread thread = new BackgroundThread();
+		//thread.execute(img);
+		
 
 //		// Get the background, which has been compiled to an AnimationDrawable object.
 //		 AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
@@ -68,12 +88,14 @@ public class GameActivity extends Activity {
 		}
 	}
 	
-	
 	public class BackgroundThread extends AsyncTask<ImageView, Void, Void> {
 	
+		
+		
 		final int SLEEP_TIME = 50;
 		
 		ArrayList<Bitmap> allImgs = new ArrayList<Bitmap>();
+		
 		
 		protected void onPreExecute(){
 			
@@ -82,10 +104,12 @@ public class GameActivity extends Activity {
 		@Override
 		protected Void doInBackground(ImageView... params) {
 			
+			ImageView view = params[0];
 			
-			int counter = R.drawable.f01;
 			//sets up an infinite loop in the thread
 			while(true){
+				
+
 				
 				// This will cause the thread to sleep for the pre-determined time
 				try {
@@ -94,11 +118,8 @@ public class GameActivity extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				view.postInvalidate();
 				
-				ImageView view = params[0];
-				view.setBackgroundResource(counter);
-				if (counter==R.drawable.f42) counter = R.drawable.f01;
-				else counter++;
 			}
 			
 			
