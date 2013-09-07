@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.widget.ImageView;
 
 public class GameActivity extends Activity {
@@ -101,4 +103,52 @@ public class GameActivity extends Activity {
 		}
 
 	}
+	
+	class MyGestureDetector extends SimpleOnGestureListener {
+		
+		@Override
+		public boolean onDoubleTap(MotionEvent e) {
+			// Drop trampoline image at location e
+			
+			return false;
+
+		}
+		
+ 	
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+        try {
+            // Calculate angle
+        	double angle = Math.toDegrees(Math.atan2(e2.getY()-e1.getY(),e2.getX()-e1.getX()));
+        	
+        	// Confirm swipe distance and length
+        	 if(Math.abs(e1.getX() - e2.getX()) > Constants.SWIPE_MIN_DISTANCE && Math.abs(velocityX) 
+        			 > Constants.SWIPE_THRESHOLD_VELOCITY)
+        	 {
+        		 if(angle<60 && angle >37) {
+        			// Call method steep slope
+        		 } else
+        			 if (angle<=37 && angle >22){
+        				// Call method medium slope
+        			 } else 
+        				 if (angle<=22 && angle >7){
+        					// Call method low slope
+        				 } else
+        					 if(angle<=7) {
+        						 //Call method flat slope
+        					 }
+        	 	 	 
+        		 
+        	 } else
+        		 return true;
+        	
+            
+   
+        } catch (Exception e) {
+        	// nothing
+        }
+        return false;
+    }
+}
+
 }
