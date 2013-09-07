@@ -1,10 +1,12 @@
 package com.PennApps.llamas;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
 import android.app.Activity;
-import android.graphics.drawable.AnimationDrawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -69,32 +71,36 @@ public class GameActivity extends Activity {
 	
 	public class BackgroundThread extends AsyncTask<ImageView, Void, Void> {
 	
-		final int SLEEP_TIME = 10;
+		final int SLEEP_TIME = 50;
+		
+		ArrayList<Bitmap> allImgs = new ArrayList<Bitmap>();
+		
+		protected void onPreExecute(){
+			
+		}
 
 		@Override
 		protected Void doInBackground(ImageView... params) {
 			
-			ImageView view = params[0];
 			
+			int counter = R.drawable.f01;
+			//sets up an infinite loop in the thread
+			while(true){
+				
+				// This will cause the thread to sleep for the pre-determined time
+				try {
+					java.lang.Thread.sleep(SLEEP_TIME);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				ImageView view = params[0];
+				view.setBackgroundResource(counter);
+				if (counter==R.drawable.f42) counter = R.drawable.f01;
+				else counter++;
+			}
 			
-			
-			return null;
-//			//sets up an infinite loop in the thread
-//			while(true){
-//				
-//				view.X_OFFSET += 5;
-//				view.postInvalidate();
-//				// This will cause the thread to sleep for the pre-determined time
-//				try {
-//					java.lang.Thread.sleep(SLEEP_TIME);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				
-//				
-//			}
-//			
 			
 			// TODO Auto-generated method stub
 			
