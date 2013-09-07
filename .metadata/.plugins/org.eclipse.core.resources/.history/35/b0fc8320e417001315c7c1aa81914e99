@@ -1,0 +1,24 @@
+package com.PennApps.llamas;
+
+import android.content.Context;
+import android.widget.ImageView;
+
+public class Constants {
+int xLocation;
+ImageView sirotanImage;
+
+	public Constants(Context c){
+	sirotanImage= new ImageView(c);
+	
+	
+	
+	
+	}
+	
+	public void eventHandler(int event) {
+		
+		
+		
+	}
+	
+}

@@ -1,0 +1,14 @@
+package com.PennApps.llamas;
+
+import android.widget.ImageView;
+
+public class Sirotan {
+int xLocation;
+
+public Sirtoan(){
+	ImageView i = new ImageView();
+	
+}
+	
+	
+}
