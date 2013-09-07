@@ -1,10 +1,17 @@
 package com.PennApps.llamas;
 
 import android.os.AsyncTask;
+import android.widget.ImageView;
 
 public class BackgroundThread extends AsyncTask<BackgroundView, Void, Void> {
+
 	
-	final int SLEEP_TIME = 100;
+	public BackgroundThread(ImageView bkg){
+		
+	}
+	
+	
+	final int SLEEP_TIME = 10;
 
 	@Override
 	protected Void doInBackground(BackgroundView... params) {

@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:drawable="@drawable/bgframe42" android:duration="50" />
-    <item android:drawable="@drawable/bgframe41" android:duration="50" />
-    <item android:drawable="@drawable/bgframe40" android:duration="50" />
-    <item android:drawable="@drawable/bgframe39" android:duration="50" />
-    <item android:drawable="@drawable/bgframe38" android:duration="50" />
-    <item android:drawable="@drawable/bgframe37" android:duration="50" />
-
+    <item android:drawable="@drawable/f01" android:duration="50" />
+    <item android:drawable="@drawable/f02" android:duration="50" />
+    <item android:drawable="@drawable/f03" android:duration="50" />
+    <item android:drawable="@drawable/f04" android:duration="50" />
+    <item android:drawable="@drawable/f05" android:duration="50" />
+    <item android:drawable="@drawable/f06" android:duration="50" />
+     <item android:drawable="@drawable/f07" android:duration="50" />
+    <item android:drawable="@drawable/f08" android:duration="50" />
+    <item android:drawable="@drawable/f09" android:duration="50" />
+    <item android:drawable="@drawable/f10" android:duration="50" />
+    <item android:drawable="@drawable/f11" android:duration="50" />
+     <item android:drawable="@drawable/f12" android:duration="50" />
+    <item android:drawable="@drawable/f13" android:duration="50" />
+    <item android:drawable="@drawable/f14" android:duration="50" />
+    <item android:drawable="@drawable/f15" android:duration="50" />
+    <item android:drawable="@drawable/f16" android:duration="50" />
+     <item android:drawable="@drawable/f17" android:duration="50" />
+    <item android:drawable="@drawable/f18" android:duration="50" />
+    <item android:drawable="@drawable/f19" android:duration="50" />
+    <item android:drawable="@drawable/f20" android:duration="50" />
+  
 </animation-list>
