@@ -38,18 +38,10 @@ public class MainActivity extends Activity {
             			 > SWIPE_THRESHOLD_VELOCITY)
             	 {
             		 if(angle<60 && angle >37) {
-            			// Call method steep slope
-            		 } else
-            			 if (angle<=37 && angle >22){
-            				// Call method medium slope
-            			 } else 
-            				 if (angle<=22 && angle >7){
-            					// Call method low slope
-            				 } else
-            					 if(angle<=7) {
-            						 //Call method flat slope
-            					 }
-            	 	 	 
+            			
+            		 }
+            			 
+            		 	 
             		 
             	 } else
             		 return true;
@@ -57,11 +49,10 @@ public class MainActivity extends Activity {
                 
        
             } catch (Exception e) {
-            	// nothing
+                // nothing
             }
             return false;
         }
-	}
 
 	
 	

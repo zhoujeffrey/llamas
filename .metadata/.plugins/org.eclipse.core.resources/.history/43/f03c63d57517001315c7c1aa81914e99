@@ -44,12 +44,13 @@ public class MainActivity extends Activity {
             				// Call method medium slope
             			 } else 
             				 if (angle<=22 && angle >7){
-            					// Call method low slope
+            					// Call method step slope
             				 } else
             					 if(angle<=7) {
-            						 //Call method flat slope
+            						 
             					 }
-            	 	 	 
+            			 
+            		 	 
             		 
             	 } else
             		 return true;
