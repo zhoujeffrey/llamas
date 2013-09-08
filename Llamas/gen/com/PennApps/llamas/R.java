@@ -76,12 +76,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int f41=0x7f020029;
         public static final int f42=0x7f02002a;
         public static final int ic_launcher=0x7f02002b;
+        public static final int llama_1=0x7f02002c;
+        public static final int llama_2=0x7f02002d;
+        public static final int llama_3=0x7f02002e;
     }
     public static final class id {
-        public static final int action_settings=0x7f090003;
+        public static final int action_settings=0x7f090004;
         public static final int bgView=0x7f090000;
-        public static final int button1=0x7f090002;
-        public static final int textView1=0x7f090001;
+        public static final int button1=0x7f090003;
+        public static final int canvasView=0x7f090001;
+        public static final int textView1=0x7f090002;
     }
     public static final class layout {
         public static final int activity_game=0x7f030000;

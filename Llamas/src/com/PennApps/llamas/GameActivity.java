@@ -8,6 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -19,11 +23,14 @@ import android.widget.ImageView;
 
 public class GameActivity extends Activity implements LooperDelegate {
 	ImageView img = null;
+	ImageView canvasHolder =null;
 	int score;
+	Canvas canvas;
 	final BackgroundThread thread = new BackgroundThread();
 	private int llama_y, base_y, base_x;
 	private int llama_y_vel;
-	
+	private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	  
 	int[] backgroundImageArray = {
 			R.drawable.f01,
 			R.drawable.f02,
@@ -89,10 +96,18 @@ public class GameActivity extends Activity implements LooperDelegate {
 		setContentView(R.layout.activity_game);
 		score = 0;
 
-		img = (ImageView) findViewById(R.id.bgView);;
+		img = (ImageView) findViewById(R.id.bgView);
 		img.setBackgroundResource(R.drawable.f01);
 		
-		
+	
+	     Bitmap b = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+         canvas = new Canvas(b);
+         paint.setColor(Color.BLACK);
+         paint.setStyle(Style.FILL);
+         canvas.drawCircle(100, 200, 1000, paint);
+
+          canvasHolder = (ImageView) findViewById(R.id.canvasView);;
+         canvasHolder.draw(canvas);
 		
     	thread.loopDelegate = this;
 		thread.execute(img);
@@ -105,6 +120,14 @@ public class GameActivity extends Activity implements LooperDelegate {
 		 
 		 
 			
+	}
+	
+	private void generateObstacle() {
+		Obstacle obs = new Obstacle(1, 800, 0, 30, 30);
+		
+		obstacle_list.add(obs);
+		
+		
 	}
 	
 	private void calculate_collision(float llama_x, float llama_y) {
@@ -195,11 +218,20 @@ public class GameActivity extends Activity implements LooperDelegate {
 		
 		runOnUiThread(new Runnable() {
 		     public void run() {
-
+		    	 
+		    	 score = score +1;
+		    	 
+		    	 if (score % 10  == 0)
+		    		 generateObstacle();
+		    		
 
 
 		    	 if(img!=null) {
 		    			img.setBackgroundResource(backgroundImageArray[counter-1]);	
+		    	 }
+		    	 
+		    	 if (canvasHolder!=null) {
+		    		 canvasHolder.draw(canvas);
 		    	 }
 		    	 calculate_collision(10, 10);
 		    	 if(llama_y > base_y) {
