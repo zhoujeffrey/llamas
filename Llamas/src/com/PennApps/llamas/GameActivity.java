@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 public class GameActivity extends Activity implements LooperDelegate {
 	ImageView img = null;
+	int score;
 	int[] backgroundImageArray = {
 			R.drawable.f01,
 			R.drawable.f02,
@@ -81,7 +82,7 @@ public class GameActivity extends Activity implements LooperDelegate {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
-		
+		score = 0;
 
 		img = (ImageView) findViewById(R.id.bgView);;
 		img.setBackgroundResource(R.drawable.f01);
@@ -192,10 +193,11 @@ public class GameActivity extends Activity implements LooperDelegate {
 		
 		runOnUiThread(new Runnable() {
 		     public void run() {
-
 		    	 if(img!=null)
 		    			img.setBackgroundResource(backgroundImageArray[counter-1]);	
-		    			
+		    	 
+		    	 // Add any updates to images here
+		    				
 		    }
 		});
 		

@@ -44,6 +44,7 @@ public class BackgroundThread extends AsyncTask<ImageView, Void, Void> {
 				}
 				if(loopDelegate != null)
 					loopDelegate.refreshView(counter);
+					
 				counter++;
 				
 				if (counter>42)
