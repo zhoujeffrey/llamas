@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -19,6 +20,10 @@ import android.widget.ImageView;
 public class GameActivity extends Activity implements LooperDelegate {
 	ImageView img = null;
 	int score;
+	final BackgroundThread thread = new BackgroundThread();
+	private int llama_y, base_y, base_x;
+	private float llama_y_vel;
+	
 	int[] backgroundImageArray = {
 			R.drawable.f01,
 			R.drawable.f02,
@@ -88,7 +93,7 @@ public class GameActivity extends Activity implements LooperDelegate {
 		img.setBackgroundResource(R.drawable.f01);
 		
 		
-		BackgroundThread thread = new BackgroundThread();
+		
     	thread.loopDelegate = this;
 		thread.execute(img);
 		
@@ -111,7 +116,7 @@ public class GameActivity extends Activity implements LooperDelegate {
 		while (i < obstacle_list.size()) {
 			test_this_obs = obstacle_list.get(i);
 			
-			if (llama_x >= test_this_obs.loc_x && llama_x <= test_this_obs.loc_x + test_this_obs.len_x) {
+			if (base_x <= test_this_obs.loc_x) {
 				// If x is no not there, don't look at y
 				if (llama_y >= test_this_obs.loc_y && llama_y <= test_this_obs.loc_y + test_this_obs.len_y) {
 					// Check to see that y is okay
@@ -122,18 +127,16 @@ public class GameActivity extends Activity implements LooperDelegate {
 		}
 	}
 	
-	private boolean handle_collision(Obstacle collided_obstacle){
+	private void handle_collision(Obstacle collided_obstacle){
 		if (collided_obstacle.type == 0){
-			// Death
-			return false;
-		}
-		else if (collided_obstacle.type == 1) {
-			// Some sort of Jump Action
-			return true;
+			thread.cancel(true);
+			this.finish();
+			startActivity(new Intent(getApplicationContext(), MainActivity.class));
+			
 		}
 		else {
-			// Something else
-			return true;
+			// Trampoline
+			
 		}
 	}
 	
@@ -193,11 +196,19 @@ public class GameActivity extends Activity implements LooperDelegate {
 		
 		runOnUiThread(new Runnable() {
 		     public void run() {
-		    	 if(img!=null)
+
+
+
+		    	 if(img!=null) {
 		    			img.setBackgroundResource(backgroundImageArray[counter-1]);	
-		    	 
-		    	 // Add any updates to images here
-		    				
+		    	 }
+		    	 calculate_collision(10, 10);
+		    	 if(llama_y > base_y) {
+		    		 llama_y = llama_y - 5;
+		    		 if (llama_y < base_y) {
+		    			 llama_y = base_y;
+		    		 }
+		    	 }
 		    }
 		});
 		
