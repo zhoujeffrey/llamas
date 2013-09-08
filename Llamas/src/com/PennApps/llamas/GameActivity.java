@@ -22,7 +22,7 @@ public class GameActivity extends Activity implements LooperDelegate {
 	int score;
 	final BackgroundThread thread = new BackgroundThread();
 	private int llama_y, base_y, base_x;
-	private float llama_y_vel;
+	private int llama_y_vel;
 	
 	int[] backgroundImageArray = {
 			R.drawable.f01,
@@ -135,8 +135,7 @@ public class GameActivity extends Activity implements LooperDelegate {
 			
 		}
 		else {
-			// Trampoline
-			
+			llama_y_vel = llama_y_vel + 25;			
 		}
 	}
 	
@@ -204,9 +203,11 @@ public class GameActivity extends Activity implements LooperDelegate {
 		    	 }
 		    	 calculate_collision(10, 10);
 		    	 if(llama_y > base_y) {
-		    		 llama_y = llama_y - 5;
+		    		 llama_y = llama_y + llama_y_vel;
+		    		 llama_y_vel = llama_y_vel - 5;
 		    		 if (llama_y < base_y) {
 		    			 llama_y = base_y;
+		    			 llama_y_vel = 0; 
 		    		 }
 		    	 }
 		    }
