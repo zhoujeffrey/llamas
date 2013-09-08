@@ -19,6 +19,7 @@ import android.widget.ImageView;
 
 public class GameActivity extends Activity implements LooperDelegate {
 	ImageView img = null;
+	int score;
 	final BackgroundThread thread = new BackgroundThread();
 	private int llama_y, base_y, base_x;
 	private int llama_y_vel;
@@ -86,7 +87,7 @@ public class GameActivity extends Activity implements LooperDelegate {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
-		
+		score = 0;
 
 		img = (ImageView) findViewById(R.id.bgView);;
 		img.setBackgroundResource(R.drawable.f01);
@@ -194,6 +195,8 @@ public class GameActivity extends Activity implements LooperDelegate {
 		
 		runOnUiThread(new Runnable() {
 		     public void run() {
+
+
 
 		    	 if(img!=null) {
 		    			img.setBackgroundResource(backgroundImageArray[counter-1]);	
