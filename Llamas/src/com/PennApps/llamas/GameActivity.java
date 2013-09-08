@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -11,20 +12,85 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.View;
+import android.util.Log;
 import android.widget.ImageView;
 
-public class GameActivity extends Activity {
+public class GameActivity extends Activity implements LooperDelegate {
+	ImageView img = null;
+	int[] backgroundImageArray = {
+			R.drawable.f01,
+			R.drawable.f02,
+			R.drawable.f03,
+			R.drawable.f04,
+			R.drawable.f05,
+			R.drawable.f06,
+			R.drawable.f07,
+			R.drawable.f08,
+			R.drawable.f09,
+			R.drawable.f10,
+			R.drawable.f11,
+			R.drawable.f12,
+			R.drawable.f13,
+			R.drawable.f14,
+			R.drawable.f15,
+			R.drawable.f16,
+			R.drawable.f17,
+			R.drawable.f18,
+			R.drawable.f19,
+			R.drawable.f20,
+			R.drawable.f21,
+			R.drawable.f22,
+			R.drawable.f23,
+			R.drawable.f24,
+			R.drawable.f25,
+			R.drawable.f26,
+			R.drawable.f27,
+			R.drawable.f28,
+			R.drawable.f29,
+			R.drawable.f30,
+			R.drawable.f31,
+			R.drawable.f32,
+			R.drawable.f33,
+			R.drawable.f34,
+			R.drawable.f35,
+			R.drawable.f36,
+			R.drawable.f37,
+			R.drawable.f38,
+			R.drawable.f39,
+			R.drawable.f40,
+			R.drawable.f41,
+			R.drawable.f42,
+	};
+	/*
+	class AnotherView extends ImageView {
+
+		public AnotherView(Context context) {
+			super(context);
+			// TODO Auto-generated constructor stub
+		}
+		
+		public void onDraw(){
+			
+		}
+		
+	}
+	*/
 	
 	private List<Obstacle> obstacle_list = new ArrayList<Obstacle>();
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
 		
-		BackgroundThread thread = new BackgroundThread();
-		thread.execute();
-		
-		ImageView img = (ImageView) findViewById(R.id.gameBg);
+
+		img = (ImageView) findViewById(R.id.bgView);;
 		img.setBackgroundResource(R.drawable.f01);
+		
+		
+		BackgroundThread thread = new BackgroundThread();
+    	thread.loopDelegate = this;
+		thread.execute(img);
+		
 
 //		// Get the background, which has been compiled to an AnimationDrawable object.
 //		 AnimationDrawable frameAnimation = (AnimationDrawable) img.getBackground();
@@ -71,44 +137,6 @@ public class GameActivity extends Activity {
 	}
 	
 	
-	public class BackgroundThread extends AsyncTask<ImageView, Void, Void> {
-	
-		final int SLEEP_TIME = 50;
-		
-		ArrayList<Bitmap> allImgs = new ArrayList<Bitmap>();
-		
-		protected void onPreExecute(){
-			
-		}
-
-		@Override
-		protected Void doInBackground(ImageView... params) {
-			
-			
-			int counter = R.drawable.f01;
-			//sets up an infinite loop in the thread
-			while(true){
-				
-				// This will cause the thread to sleep for the pre-determined time
-				try {
-					java.lang.Thread.sleep(SLEEP_TIME);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				ImageView view = params[0];
-				view.setBackgroundResource(counter);
-				if (counter==R.drawable.f42) counter = R.drawable.f01;
-				else counter++;
-			}
-			
-			
-			// TODO Auto-generated method stub
-			
-		}
-
-	}
 	
 	class MyGestureDetector extends SimpleOnGestureListener {
 		
@@ -156,5 +184,23 @@ public class GameActivity extends Activity {
         return false;
     }
 }
+
+
+
+	@Override
+	public void refreshView(final int counter) {
+		
+		runOnUiThread(new Runnable() {
+		     public void run() {
+
+		    	 if(img!=null)
+		    			img.setBackgroundResource(backgroundImageArray[counter-1]);	
+		    			
+		    }
+		});
+		
+		
+		
+	}
 
 }

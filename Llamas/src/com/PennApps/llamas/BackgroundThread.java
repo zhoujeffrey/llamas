@@ -1,42 +1,58 @@
 package com.PennApps.llamas;
 
+import java.util.ArrayList;
+
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-public class BackgroundThread extends AsyncTask<BackgroundView, Void, Void> {
+interface LooperDelegate
+{
+	public void refreshView(int counter);
+}
+	
+public class BackgroundThread extends AsyncTask<ImageView, Void, Void> {
+	
+		
+	public LooperDelegate loopDelegate = null;
 
-	
-	public BackgroundThread(ImageView bkg){
+		final int SLEEP_TIME = 50;
 		
-	}
-	
-	
-	final int SLEEP_TIME = 10;
-
-	@Override
-	protected Void doInBackground(BackgroundView... params) {
+		ArrayList<Bitmap> allImgs = new ArrayList<Bitmap>();
 		
-		BackgroundView view = params[0]; 
 		
-		//sets up an infinite loop in the thread
-		while(true){
+		protected void onPreExecute(){
 			
-			view.X_OFFSET += 5;
-			view.postInvalidate();
-			// This will cause the thread to sleep for the pre-determined time
-			try {
-				java.lang.Thread.sleep(SLEEP_TIME);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		}
+
+		@Override
+		protected Void doInBackground(ImageView... params) {
+			
+			ImageView view = params[0];
+			int counter = 1;
+			//sets up an infinite loop in the thread
+			while(true){
+				
+
+				
+				// This will cause the thread to sleep for the pre-determined time
+				try {
+					java.lang.Thread.sleep(SLEEP_TIME);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(loopDelegate != null)
+					loopDelegate.refreshView(counter);
+				counter++;
+				
+				if (counter>42)
+					counter=1;
 			}
 			
 			
+			// TODO Auto-generated method stub
+			
 		}
-		
-		
-		// TODO Auto-generated method stub
-		
-	}
 
-}
+	}
